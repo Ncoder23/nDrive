@@ -2,7 +2,7 @@ export interface File {
   id: string
   name: string
   type: "file"
-  url?: string
+  url: string
   parent: string
   size?: string
 }
@@ -25,11 +25,11 @@ export const mockFolders: Folder[] = [
 ]
 export const mockFiles: File[] = [
   { id: "1", name: "Resume.pdf", type: "file", parent: "root", url: "https://www.google.com", size: "100KB" },
-  { id: "2", name: "Project Proposal.docx", type: "file", parent: "Documents" },
-  { id: "3", name: "Vacation.jpg", type: "file", parent: "Images" },
-  { id: "4", name: "Profile Picture.png", type: "file", parent: "Images" },
-  { id: "5", name: "Presentation.pptx", type: "file", parent: "Work" },
-  { id: "6", name: "Budget.xlsx", type: "file", parent: "Work" },
+  { id: "2", name: "Project Proposal.docx", type: "file", parent: "Documents", size: "200KB", url: "https://www.google.com" },
+  { id: "3", name: "Vacation.jpg", type: "file", parent: "Images", size: "300KB", url: "https://www.google.com" },
+  { id: "4", name: "Profile Picture.png", type: "file", parent: "Images", size: "400KB", url: "https://www.google.com" },
+  { id: "5", name: "Presentation.pptx", type: "file", parent: "Work", size: "500KB", url: "https://www.google.com" },
+  { id: "6", name: "Budget.xlsx", type: "file", parent: "Work", size: "600KB", url: "https://www.google.com" },
   
 ]
 

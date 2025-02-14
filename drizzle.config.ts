@@ -12,6 +12,7 @@ export default defineConfig({
     password: env.SINGLESTORE_PASSWORD,
     database: env.SINGLESTORE_DB_NAME,
     ssl: {},
+    
   },
   tablesFilter: ["ndriveapp-netlify_*"],
 });

@@ -1,8 +1,8 @@
 import "server-only";
 
-import { 
-   
-  text, 
+import {
+
+  text,
   mysqlTable as singlestoreTable,
   bigint,
   index,
@@ -25,6 +25,7 @@ export const files = singlestoreTable("files_table", {
 }, (t) => ({
   parentIdx: index("parent_idx").on(t.parent),
 }));
+export type DB_FILETYPE = typeof files.$inferSelect;
 
 export const folders = singlestoreTable("folders_table", {
   id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
@@ -33,4 +34,5 @@ export const folders = singlestoreTable("folders_table", {
 }, (t) => ({
   parentIdx: index("parent_idx").on(t.parent),
 }));
+export type DB_FOLDERTYPE = typeof folders.$inferSelect;
 

@@ -1,9 +1,10 @@
 import { db } from "~/server/db"
+
 import { files as FileSchema, folders as FolderSchema } from "~/server/db/schema"
 import { eq } from "drizzle-orm";
 
 
-const QUERIES = {
+export const QUERIES = {
 
     getFiles: function (parsedFolderId: number) {
         return db.select().from(FileSchema).where(
@@ -35,5 +36,18 @@ const QUERIES = {
 
 };
 
+export const MUTATIONS = {
 
-export default QUERIES;
+    createFile: async function (input: ({
+        file: {
+            name: string;
+            size: number;
+            url: string;
+            type: string;
+            parent: number;
+        };
+        userId: string;
+    })) {
+        return await db.insert(FileSchema).values(input.file);
+    }
+}

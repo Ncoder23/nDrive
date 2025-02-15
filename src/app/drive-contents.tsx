@@ -2,9 +2,8 @@
 
 // import { useMemo, useState } from "react"
 
-import { Upload, ChevronRight } from "lucide-react"
+import { ChevronRight } from "lucide-react"
 
-import { Button } from "~/components/ui/button"
 import { FileRow, FolderRow } from "./file-row"
 import type { files, folders } from "~/server/db/schema"
 import Link from "next/link"
@@ -14,12 +13,16 @@ import {
   SignedOut,
   UserButton
 } from '@clerk/nextjs'
+import { UploadButton } from "~/components/uploadthing"
+import { useRouter } from "next/navigation"
 
 export default function DriveContents(props: {
   files: typeof files.$inferSelect[];
   folders: typeof folders.$inferSelect[];
   parents: typeof folders.$inferSelect[];
 }) {
+
+  const navigate = useRouter();
   //const [currentFolder, setCurrentFolder] = useState<number>(1)
 
   // const getCurrentFiles = () => {
@@ -49,9 +52,7 @@ export default function DriveContents(props: {
   //   return breadcrumbs
   // }, [currentFolder, props.folders])
 
-  const handleUpload = () => {
-    alert("Upload functionality would be implemented here")
-  }
+
 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100 p-8">
@@ -95,8 +96,8 @@ export default function DriveContents(props: {
           <div className="px-6 py-4 border-b border-gray-700">
             <div className="grid grid-cols-12 gap-4 text-sm font-medium text-gray-400">
               <div className="col-span-6">Name</div>
-              <div className="col-span-3">Type</div>
               <div className="col-span-3">Size</div>
+              <div className="col-span-3">Type</div>
             </div>
           </div>
           <ul>
@@ -111,6 +112,9 @@ export default function DriveContents(props: {
             ))}
           </ul>
         </div>
+        <UploadButton endpoint='imageUploader' onClientUploadComplete={() => {
+          navigate.refresh();
+        }} />
       </div>
     </div>
   )

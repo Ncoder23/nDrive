@@ -1,13 +1,13 @@
-import {db} from "~/server/db"
-import {files as FileSchema, folders as FolderSchema} from "~/server/db/schema"
-import DriveContents from "~/app/drive-contents";
+import React from 'react'
 
-export default async function GoogleDriveClone() {
-  const files = await db.select().from(FileSchema);
-  const folders = await db.select().from(FolderSchema);
+export default function GoogleDriveClone() {
 
-return (
-  <DriveContents files={files} folders={folders} />
-)  
+
+
+  return (
+    <div className="min-h-screen bg-gray-900 text-gray-100 p-8">
+      <h1>nDrive</h1>
+    </div>
+  )
 }
 

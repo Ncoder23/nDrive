@@ -1,17 +1,18 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { mockFiles, mockFolders } from "../lib/mock-data"
-import { Folder, FileIcon, Upload, ChevronRight } from "lucide-react"
-import Link from "next/link"
+
+import { Upload, ChevronRight } from "lucide-react"
+
 import { Button } from "~/components/ui/button"
 import { FileRow, FolderRow } from "./file-row"
-import { files, folders } from "~/server/db/schema"
+import type { files, folders } from "~/server/db/schema"
+
 export default function DriveContents(props: {
   files: typeof files.$inferSelect[];
   folders: typeof folders.$inferSelect[];
 }) {
-  const [currentFolder, setCurrentFolder] = useState<number >(1)
+  const [currentFolder, setCurrentFolder] = useState<number>(1)
 
   // const getCurrentFiles = () => {
   //   return mockFiles.filter((file) => file.parent === currentFolder)
@@ -39,7 +40,7 @@ export default function DriveContents(props: {
     }
 
     return breadcrumbs
-  }, [currentFolder])
+  }, [currentFolder, props.folders])
 
   const handleUpload = () => {
     alert("Upload functionality would be implemented here")
@@ -57,7 +58,7 @@ export default function DriveContents(props: {
             >
               My Drive
             </Button>
-            {breadcrumbs.map((folder, index) => (
+            {breadcrumbs.map((folder, _) => (
               <div key={folder.id} className="flex items-center">
                 <ChevronRight className="mx-2 text-gray-500" size={16} />
                 <Button
@@ -85,7 +86,9 @@ export default function DriveContents(props: {
           </div>
           <ul>
             {props.files.map((file) => (
-              <FileRow key={file.id} file={file} handleFileClick={() => {}} />
+              <FileRow key={file.id} file={file} handleFileClick={() => {
+                alert("File clicked")
+              }} />
             ))}
             {props.folders.map((folder) => (
               <FolderRow key={folder.id} folder={folder} handleFolderClick={() => {

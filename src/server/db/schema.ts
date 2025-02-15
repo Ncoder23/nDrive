@@ -1,7 +1,7 @@
 import "server-only";
 
 import { 
-  int, 
+   
   text, 
   mysqlTable as singlestoreTable,
   bigint,

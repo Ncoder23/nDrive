@@ -27,7 +27,9 @@ export default async function GoogleDriveClone(props: {
     ]);
 
     return (
-        <DriveContents files={files} folders={folders} parents={parents} />
+        <DriveContents files={files} folders={folders} parents={parents} currentFolderId={
+            parsedFolderId
+        } />
     )
 }
 

@@ -1,33 +1,42 @@
 import { auth } from "@clerk/nextjs/server";
+import { z } from "zod";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
-import { MUTATIONS } from "~/server/db/quries";
+import { MUTATIONS, QUERIES } from "~/server/db/quries";
 
 const f = createUploadthing();
 
 // FileRouter for your app, can contain multiple FileRoutes
 export const ourFileRouter = {
     // Define as many FileRoutes as you like, each with a unique routeSlug
-    imageUploader: f({
-        image: {
+    driveUploader: f({
+        blob: {
             /**
              * For full list of options and defaults, see the File Route API reference
              * @see https://docs.uploadthing.com/file-routes#route-config
              */
             maxFileSize: "4MB",
-            maxFileCount: 1,
+            maxFileCount: 100,
         },
-    })
+    }).input(
+        z.object({
+            folderId: z.number(),
+        }),
+    )
         // Set permissions and file types for this FileRoute
-        .middleware(async ({ }) => {
+        .middleware(async ({ input }) => {
             // This code runs on your server before upload
             const user = await auth();
 
             // If you throw, the user will not be able to upload
             if (!user.userId) throw new UploadThingError("Unauthorized");
+            const parentFolder = await QUERIES.getFolderById(input.folderId);
+            const parentId = parentFolder;
 
+            if (!parentId) throw new UploadThingError("Folder not found");
+            if (parentId.ownerId !== user.userId) throw new UploadThingError("Unauthorized");
             // Whatever is returned here is accessible in onUploadComplete as `metadata`
-            return { userId: user.userId };
+            return { userId: user.userId, parentId: parentFolder };
         })
         .onUploadComplete(async ({ metadata, file }) => {
             // This code RUNS ON YOUR SERVER after upload
@@ -40,9 +49,10 @@ export const ourFileRouter = {
                     size: file.size,
                     url: file.url,
                     type: file.type,
-                    parent: 1, // For now, all files are in the root folder
+                    parent: metadata.parentId.id, // For now, all files are in the root folder
+                    // For now, all files are in the root folder
                 },
-                userId: metadata.userId,
+                ownerId: metadata.userId,
             });
             // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
             return { uploadedBy: metadata.userId };

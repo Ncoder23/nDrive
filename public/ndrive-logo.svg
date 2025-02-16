@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60">
+  <!-- Main storage shape -->
+  <path 
+    d="M40 15 L60 15 L70 30 L50 30 Z" 
+    fill="#4285f4"
+    opacity="0.9"
+  />
+  <path 
+    d="M30 30 L50 30 L60 45 L40 45 Z" 
+    fill="#0066ff"
+    opacity="0.9"
+  />
+  <path 
+    d="M50 30 L70 30 L60 45 L40 45 Z" 
+    fill="#002b80"
+    opacity="0.9"
+  />
+  
+  <!-- Text -->
+  <text x="85" y="40" font-family="Arial, sans-serif" font-weight="bold" font-size="32" fill="#1a1a1a">
+    <tspan fill="#4285f4">n</tspan><tspan fill="#1a1a1a">Drive</tspan>
+  </text>
+</svg>

@@ -56,12 +56,12 @@ export default function DriveContents(props: {
 
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-800 to-gray-600 text-gray-100 p-8">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center">
             <Link
-              href="/f/1"
+              href={`/f/${props.currentFolderId}`}
 
               className="text-gray-300 hover:text-white mr-2"
             >
@@ -97,7 +97,7 @@ export default function DriveContents(props: {
           <div className="px-6 py-4 border-b border-gray-700">
             <div className="grid grid-cols-12 gap-4 text-sm font-medium text-gray-400">
               <div className="col-span-6">Name</div>
-              <div className="col-span-3">Size</div>
+              <div className="col-span-2">Size</div>
               <div className="col-span-3">Type</div>
             </div>
           </div>
@@ -113,9 +113,13 @@ export default function DriveContents(props: {
             ))}
           </ul>
         </div>
-        <UploadButton endpoint='driveUploader' onClientUploadComplete={() => {
-          navigate.refresh();
-        }}
+        <UploadButton
+          className="mt-4"
+          endpoint='driveUploader'
+
+          onClientUploadComplete={() => {
+            navigate.refresh();
+          }}
           input={{ folderId: props.currentFolderId }}
         />
       </div>

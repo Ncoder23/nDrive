@@ -48,7 +48,7 @@ export const QUERIES = {
             and(eq(FolderSchema.ownerId, userId), isNull(FolderSchema.parent))
         );
         return folder[0];
-    }
+    },
 
 };
 

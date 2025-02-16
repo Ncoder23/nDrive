@@ -30,7 +30,7 @@ export const ourFileRouter = {
 
             // If you throw, the user will not be able to upload
             if (!user.userId) throw new UploadThingError("Unauthorized");
-            const parentFolder = await QUERIES.getFolderById(input.folderId);
+            const parentFolder = await QUERIES.getFolderById(input.folderId, user.userId);
             const parentId = parentFolder;
 
             if (!parentId) throw new UploadThingError("Folder not found");

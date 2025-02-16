@@ -7,7 +7,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 export const metadata: Metadata = {
     title: "nDrive",
     description: "It's like Google Drive, but not by Google!",
-    icons: [{ rel: "icon", url: "/favicon.ico" }],
+    icons: [{ rel: "icon", url: "/ndrive-logo.svg" }],
 };
 
 export default function RootLayout({

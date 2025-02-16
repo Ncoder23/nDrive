@@ -9,14 +9,16 @@ A cloud native file management system built using the **T3 Stack** with **TypeSc
 - [x] Move folder open state to URL
 - [x] Add auth
 - [x] Add file uploading
-- [x] Add analytics
 - [x] Make sure sort order is consistent
 - [x] Real homepage + onboarding
 - [x] Add delete
 - [x] Gray out a row while it's being deleted
 - [ ] Folder Deletion
 - [ ] Folder Creation
+- [ ] Imporve UI/UX
 - [ ] Shared File
+- [ ] Add analytics
+- [ ] ......
 ---
 
 ## 📌 Tech Stack

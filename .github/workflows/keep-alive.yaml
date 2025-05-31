@@ -1,0 +1,33 @@
+name: Keep Database Alive
+
+on:
+  schedule:
+    # Runs every 15 days
+    - cron: '0 0 */15 * *'
+  # Allows manual triggering of the workflow
+  workflow_dispatch:
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: npm install -g pnpm && pnpm install
+
+      - name: Copy .env.example files
+        shell: bash
+        run: find . -type f -name ".env.example" -exec sh -c 'cp "$1" "${1%.*}"' _ {} \;
+
+      - name: Keep Database Alive
+        run: |
+          # Get the deployment URL from environment variables
+          DEPLOYMENT_URL=${{ secrets.DEPLOYMENT_URL }}
+          
+          # Make the keep-alive request
+          curl -X GET "${DEPLOYMENT_URL}/api/keep-alive"
+        env:
+          # Add any other environment variables your app needs
+          NODE_ENV: production 

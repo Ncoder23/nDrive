@@ -13,8 +13,8 @@ A cloud native file management system built using the **T3 Stack** with **TypeSc
 - [x] Real homepage + onboarding
 - [x] Add delete
 - [x] Gray out a row while it's being deleted
-- [ ] Folder Deletion
-- [ ] Folder Creation
+- [x] Folder Deletion
+- [x] Folder Creation
 - [ ] Imporve UI/UX
 - [ ] Shared File
 - [ ] Add analytics
